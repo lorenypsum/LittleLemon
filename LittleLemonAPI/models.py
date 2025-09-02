@@ -1,4 +1,5 @@
 from django.db import models
+from django.contrib.auth.models import User
 
 class Category(models.Model):
     slug = models.SlugField(max_length=50, unique=True)
@@ -15,3 +16,11 @@ class MenuItem(models.Model):
 
     def __str__(self):
         return self.title
+    
+class Rating(models.Model):
+    menuitem_id = models.SmallIntegerField
+    rating = models.SmallIntegerField()
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return str(self.rating)
